@@ -1,12 +1,10 @@
 import React from "react";
 import SongItem from "./SongItem"
 
-const SongList = (props) => {
-    console.log("this is props in SongList", props)
+const SongList = ({songs, deleteSong}) => {
 
-    const songList = props.songs.map(song => {
-        console.log("this is song in SongList props.songs.map", song)
-        return <SongItem key={song.id} song={song} />
+    const songList = songs.map(song => {
+        return <SongItem key={song.id} song={song} deleteSong={deleteSong}/>
     })
 
   return (
