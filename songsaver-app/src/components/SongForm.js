@@ -94,13 +94,13 @@ class SongForm extends React.Component {
                   name="genre"
                 >
                   <option value="">--select genre--</option>
-                  <option value="classic">Classic</option>
-                  <option value="pop">Pop</option>
-                  <option value="jazz">Jazz</option>
-                  <option value="rock">Rock</option>
-                  <option value="soul">Soul</option>
-                  <option value="metal">Metal</option>
-                  <option value="hiphop">Hiphop</option>
+                  <option value="Classic">Classic</option>
+                  <option value="Pop">Pop</option>
+                  <option value="Jazz">Jazz</option>
+                  <option value="Rock">Rock</option>
+                  <option value="Soul">Soul</option>
+                  <option value="Metal">Metal</option>
+                  <option value="Hiphop">Hiphop</option>
                 </select>
               </td>
               <td>

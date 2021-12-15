@@ -1,10 +1,17 @@
 import React from "react";
 import SongItem from "./SongItem"
 
-const SongList = ({songs, deleteSong}) => {
+const SongList = ({songs, deleteSong, selectGenre, selectRating}) => {
 
     const songList = songs.map(song => {
-        return <SongItem key={song.id} song={song} deleteSong={deleteSong}/>
+        if (song.filtered = true) {
+            console.log("check if song is true", song.filtered)
+            return <SongItem key={song.id} song={song} deleteSong={deleteSong}/>
+        }
+        else {
+            console.log("song.filtered was false (check)", song.filtered)
+        }
+        
     })
 
   return (
@@ -15,8 +22,28 @@ const SongList = ({songs, deleteSong}) => {
           <tr>
             <th>Song</th>
             <th>Artist</th>
-            <th>Genre</th>
-            <th>Rating</th>
+            <th>
+                <select onChange={selectGenre}>
+                    <option value="">--genre--</option>
+                    <option value="Classic">Classic</option>
+                    <option value="Pop">Pop</option>
+                    <option value="Jazz">Jazz</option>
+                    <option value="Rock">Rock</option>
+                    <option value="Soul">Soul</option>
+                    <option value="Metal">Metal</option>
+                    <option value="Hiphop">Hiphop</option>
+                </select>
+            </th>
+            <th>
+                <select onChange={() => selectRating(songs.rating)}>
+                    <option value="">--rating--</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </th>
           </tr>
             {songList}
         </tbody>
