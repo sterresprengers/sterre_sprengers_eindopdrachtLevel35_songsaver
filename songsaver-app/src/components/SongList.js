@@ -1,17 +1,39 @@
 import React from "react";
 import SongItem from "./SongItem"
 
-const SongList = ({songs, deleteSong, selectGenre, selectRating}) => {
+const SongList = ({songs, deleteSong, selectGenre, selectRating, selectedGenre}) => {
+    console.log("songs in SongList is", songs)
+
+    // const songList = songs.map(song => {
+    //     // console.log("this is song.genre", song.genre)
+    //     // if (selectedGenre === null || song.genre) {
+    //         // console.log("song.genre YES")
+    //         return <SongItem key={song.id} song={song} deleteSong={deleteSong}/>
+    //     // }
+    //     // else {
+    //         // console.log("song.genre NO")
+    //     // }  
+    // })
+
+    // const songList = songs.map(song => {
+    //     console.log("this is song.genre", song.genre)
+    //     if (selectedGenre === null || song.genre) {
+    //         console.log("song.genre YES")
+    //         return <SongItem key={song.id} song={song} deleteSong={deleteSong}/>
+    //     }
+    //     else {
+    //         console.log("song.genre NO")
+    //     }  
+    // })
 
     const songList = songs.map(song => {
-        if (song.filtered = true) {
+        if (song.filtered === true) {
             console.log("check if song is true", song.filtered)
             return <SongItem key={song.id} song={song} deleteSong={deleteSong}/>
         }
         else {
             console.log("song.filtered was false (check)", song.filtered)
         }
-        
     })
 
   return (
