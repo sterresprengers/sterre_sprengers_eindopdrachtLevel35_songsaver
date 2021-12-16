@@ -7,14 +7,14 @@ class SongOverview extends React.Component {
     super();
     this.state = {
       songs: [
-        // { id: "", title: "", artist: "", genre: "", rating: ""}
         {
           id: 1,
           title: "Ik ben een kerstbal",
           artist: "Bert & Ernie",
           genre: "Pop",
-          rating: "3",
-          filtered: true,
+          rating: "1",
+          filteredGenre: true,
+          filteredRating: true
         },
         {
           id: 2,
@@ -22,7 +22,8 @@ class SongOverview extends React.Component {
           artist: "Simeon ten Holt",
           genre: "Classic",
           rating: "5",
-          filtered: true,
+          filteredGenre: true,
+          filteredRating: true
         },
         {
           id: 3,
@@ -30,7 +31,8 @@ class SongOverview extends React.Component {
           artist: "Metallica",
           genre: "Rock",
           rating: "2",
-          filtered: true,
+          filteredGenre: true,
+          filteredRating: true
         },
         {
           id: 4,
@@ -38,15 +40,17 @@ class SongOverview extends React.Component {
           artist: "Bert & Ernie",
           genre: "Pop",
           rating: "3",
-          filtered: true,
+          filteredGenre: true,
+          filteredRating: true
         },
         {
           id: 5,
           title: "Meandres",
           artist: "Simeon ten Holt",
           genre: "Classic",
-          rating: "5",
-          filtered: true,
+          rating: "4",
+          filteredGenre: true,
+          filteredRating: true
         },
         {
           id: 6,
@@ -54,7 +58,8 @@ class SongOverview extends React.Component {
           artist: "Metallica",
           genre: "Rock",
           rating: "2",
-          filtered: true,
+          filteredGenre: true,
+          filteredRating: true
         },
       ],
     };
@@ -62,7 +67,6 @@ class SongOverview extends React.Component {
     this.deleteSong = this.deleteSong.bind(this);
     this.selectGenre = this.selectGenre.bind(this);
     this.selectRating = this.selectRating.bind(this);
-    // this.render = this.render.bind(this)
   }
 
   addSong = (song) => {
@@ -72,6 +76,8 @@ class SongOverview extends React.Component {
       artist: song.artist,
       genre: song.genre,
       rating: song.rating,
+      filteredGenre: true,
+      filteredRating: true
     };
     this.setState({ songs: this.state.songs.concat(newSong) });
   };
@@ -81,170 +87,67 @@ class SongOverview extends React.Component {
       const oldSongList = [...prevState.songs];
       const newSongList = oldSongList.filter((item) => item !== song);
       const newList = { ...prevState, songs: newSongList };
-      console.log("newList in deleteSong is", newList);
       return newList;
     });
   };
 
   selectGenre = (event) => {
-    console.log("selectGenre was activated");
     const selectedGenre = event.target.value;
-    console.log("selectedGenre is", selectedGenre);
-    // this.setState(prevState => {
-    // const oldSongList = [...prevState.songs]
-    // console.log("the oldSongList =", oldSongList)
     const newSongList = this.state.songs.map((song) => {
-      if (song.genre !== selectedGenre) {
-        console.log("genre wasn't same as selected genre", song.genre);
+      if (selectedGenre === "All" || selectedGenre === song.genre) {
         return {
           id: song.id,
           title: song.title,
           artist: song.artist,
           genre: song.genre,
-          // rating: song.rating,
-          filtered: false,
+          rating: song.rating,
+          filteredGenre: true,
+          filteredRating: true
         };
-      } else {
+      } 
+      else {
         return {
           id: song.id,
           title: song.title,
           artist: song.artist,
           genre: song.genre,
-          // rating: song.rating
-          filtered: true,
+          rating: song.rating,
+          filteredGenre: false,
+          filteredRating: true
         };
       }
     });
-    console.log("the newSongList", newSongList);
     this.setState({ songs: newSongList})
-
-    // return newSongList
-    // const newThisStateSongs = {...prevState, songs: newSongList}
-    // console.log("newThisStateSongs is", newThisStateSongs)
-    // return newThisStateSongs
-    // })
   };
 
-  // selectGenre = (event) => {
-  //   const selectedGenre = event.target.value
-  //   console.log("selectGenre was activated with", selectedGenre)
-  //   this.setState({
-  //     songs: [...this.state.songs].filter(song => {
-  //       if (song.genre === selectedGenre) {
-  //         console.log("genre wasn't same as selectedGenre")
-  //         return {
-  //           filtered: true
-  //         }
-  //       }
-
-  //     })
-  //   })
-  // }
-
-  // selectGenre = (event) => {
-  //   const selectedGenre = event.target.value
-  //   const newList = this.state.songs.map((song) => {
-  //     if (song.genre === selectedGenre) {
-  //       console.log("genre wasn't same as selected genre", song.genre)
-  //       return {
-  //         id: song.id,
-  //         title: song.title,
-  //         artist: song.artist,
-  //         // genre: song.genre,
-  //         filtered: false
-  //       }
-  //     }
-  //     else {
-  //       console.log("wasn't equal")
-  //       return {
-  //         id: song.id,
-  //         title: song.title,
-  //         artist: song.artist,
-  //         genre: song.genre,
-  //         filtered: true
-  //       }
-  //     }
-  //   })
-  //   this.setState({
-  //     songs: [...this.state.songs].concat(newList)
-  //   })
-  // }
-
-  // BEST WERKENDE TOT NU TOE:
-  // selectGenre = (event) => {
-  //   const selectedGenre = event.target.value
-  //   console.log("selectGenre was activated with", selectedGenre)
-  //   this.setState(prevState => {
-  //     const oldSongList = [...prevState.songs]
-  //     // console.log("the oldSongList", oldSongList[1].filtered)
-  //     const newSongList = oldSongList.map((song) => {
-  //       if (song.genre !== selectedGenre) {
-  //         console.log("genre wasn't same as selected genre", song.genre)
-  //         return {
-  //           // id: song.id,
-  //           // title: song.title,
-  //           // artist: song.artist,
-  //           // genre: song.genre,
-  //           filtered: false
-  //         }
-  //       }
-  //       else {
-  //         return {
-  //           // id: song.id,
-  //           // title: song.title,
-  //           // artist: song.artist,
-  //           // genre: song.genre,
-  //           filtered: true}
-  //       }
-  //     })
-  //     console.log("the newSongList", newSongList)
-  //     return newSongList
-  //     // const newThisStateSongs = {...prevState, songs: newSongList}
-  //     // console.log("newThisStateSongs is", newThisStateSongs)
-  //     // return newThisStateSongs
-  //   })
-  // }
-
-  // selectGenre = (event) => {
-  //   // const {value} = event.target
-  //   const selectedGenre = event.target.value
-  //   console.log("selectGenre was activated", event.target.value)
-  //   // const existingGenresInList = [this.state.songs.genre]
-  //   // console.log("existingGenresInList is", existingGenresInList)
-  //   const filteredList = this.state.songs.filter((song) => {
-  //     console.log("this.state.songs.filter was activated")
-  //     const songGenre = song.genre
-  //     return songGenre === selectedGenre
-  //   })
-  //   console.log("this is filteredList after .fiilter()", filteredList)
-  //   return <SongList
-  //             songs={filteredList}
-  //             deleteSong={this.deleteSong}
-  //             selectGenre={this.selectGenre}
-  //             selectRating={this.selectRating}
-  //           />
-  // }
-
-  // selectGenre = (event) => {
-  //   // const {value} = event.target
-  //   const selectedGenre = event.target.value
-  //   console.log("selectGenre was activated", selectedGenre)
-  //   this.setState(prevState => {
-  //     const oldSongList = [...prevState.songs]
-  //     console.log("this is oldSongList", oldSongList)
-  //     const newSongList = oldSongList.filter(item => {
-  //       const itemGenre = item.genre
-  //       console.log("itemGenre is", itemGenre)
-  //       return itemGenre === selectedGenre
-  //     })
-  //     console.log("this is newSongList", newSongList)
-  //     const newList = {...prevState, songs: newSongList}
-  //     return newList
-  //   })
-  // }
-
-  selectRating = (rating) => {
-    console.log("selectRating was activated");
+  selectRating = (event) => {
+    const selectedRating = event.target.value
+    const newSongList = this.state.songs.map((song) => {
+      if (selectedRating === "All" || selectedRating === song.rating) {
+        return {
+          id: song.id,
+          title: song.title,
+          artist: song.artist,
+          genre: song.genre,
+          rating: song.rating,
+          filteredGenre: true,
+          filteredRating: true
+        };
+      } 
+      else {
+        return {
+          id: song.id,
+          title: song.title,
+          artist: song.artist,
+          genre: song.genre,
+          rating: song.rating,
+          filteredGenre: true,
+          filteredRating: false
+        };
+      }
+    });
+    this.setState({ songs: newSongList})
+    
   };
 
   render() {
@@ -256,7 +159,6 @@ class SongOverview extends React.Component {
           deleteSong={this.deleteSong}
           selectGenre={this.selectGenre}
           selectRating={this.selectRating}
-          selectedGenre={null}
         />
       </div>
     );

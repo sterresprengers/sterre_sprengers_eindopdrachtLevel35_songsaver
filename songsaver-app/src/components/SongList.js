@@ -1,38 +1,11 @@
 import React from "react";
 import SongItem from "./SongItem"
 
-const SongList = ({songs, deleteSong, selectGenre, selectRating, selectedGenre}) => {
-    console.log("songs in SongList is", songs)
-
-    // const songList = songs.map(song => {
-    //     // console.log("this is song.genre", song.genre)
-    //     // if (selectedGenre === null || song.genre) {
-    //         // console.log("song.genre YES")
-    //         return <SongItem key={song.id} song={song} deleteSong={deleteSong}/>
-    //     // }
-    //     // else {
-    //         // console.log("song.genre NO")
-    //     // }  
-    // })
-
-    // const songList = songs.map(song => {
-    //     console.log("this is song.genre", song.genre)
-    //     if (selectedGenre === null || song.genre) {
-    //         console.log("song.genre YES")
-    //         return <SongItem key={song.id} song={song} deleteSong={deleteSong}/>
-    //     }
-    //     else {
-    //         console.log("song.genre NO")
-    //     }  
-    // })
+const SongList = ({songs, deleteSong, selectGenre, selectRating, }) => {
 
     const songList = songs.map(song => {
-        if (song.filtered === true) {
-            console.log("check if song is true", song.filtered)
+        if (song.filteredGenre === true && song.filteredRating === true) {
             return <SongItem key={song.id} song={song} deleteSong={deleteSong}/>
-        }
-        else {
-            console.log("song.filtered was false (check)", song.filtered)
         }
     })
 
@@ -46,7 +19,7 @@ const SongList = ({songs, deleteSong, selectGenre, selectRating, selectedGenre})
             <th>Artist</th>
             <th>
                 <select onChange={selectGenre}>
-                    <option value="">--genre--</option>
+                    <option value="All">--genre--</option>
                     <option value="Classic">Classic</option>
                     <option value="Pop">Pop</option>
                     <option value="Jazz">Jazz</option>
@@ -57,8 +30,8 @@ const SongList = ({songs, deleteSong, selectGenre, selectRating, selectedGenre})
                 </select>
             </th>
             <th>
-                <select onChange={() => selectRating(songs.rating)}>
-                    <option value="">--rating--</option>
+                <select onChange={selectRating}>
+                    <option value="All">--rating--</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
