@@ -1,6 +1,6 @@
 // NOTE TO WINC TEACHERS:
 // I've built filterGenre and filterRating as two seperated handle events (those are commented out below)
-// I've also tried to combine those filters into one new handleFilter function, 
+// I've also tried to combine those filters into one new handleFilter function,
 // which works flowless untill certain point (if filters are combined about four times)
 
 import React from "react";
@@ -18,8 +18,8 @@ class SongOverview extends React.Component {
           artist: "Bert & Ernie",
           genre: "Pop",
           rating: "1",
-          filteredGenre: "Yes",
-          filteredRating: "Yes"
+          filteredGenre: true,
+          filteredRating: true,
         },
         {
           id: 2,
@@ -27,52 +27,52 @@ class SongOverview extends React.Component {
           artist: "Simeon ten Holt",
           genre: "Classic",
           rating: "5",
-          filteredGenre: "Yes",
-          filteredRating: "Yes"
+          filteredGenre: true,
+          filteredRating: true,
         },
         {
           id: 3,
-          title: "Unforgiven 2",
-          artist: "Metallica",
+          title: "Unretrofied",
+          artist: "The Dillinger Escape Plan",
           genre: "Rock",
-          rating: "2",
-          filteredGenre: "Yes",
-          filteredRating: "Yes"
+          rating: "4",
+          filteredGenre: true,
+          filteredRating: true,
         },
         {
           id: 4,
-          title: "Wachten duurt lang",
-          artist: "Bert & Ernie",
-          genre: "Pop",
+          title: "Shake it like a polaroid picture",
+          artist: "Outkast",
+          genre: "Hiphop",
           rating: "3",
-          filteredGenre: "Yes",
-          filteredRating: "Yes"
+          filteredGenre: true,
+          filteredRating: true,
         },
         {
           id: 5,
-          title: "Meandres",
-          artist: "Simeon ten Holt",
+          title: "Moonlight",
+          artist: "JS Bach",
           genre: "Classic",
-          rating: "4",
-          filteredGenre: "Yes",
-          filteredRating: "Yes"
+          rating: "2",
+          filteredGenre: true,
+          filteredRating: true,
         },
         {
           id: 6,
-          title: "Nothing else matters",
-          artist: "Metallica",
-          genre: "Rock",
-          rating: "2",
-          filteredGenre: "Yes",
-          filteredRating: "Yes"
+          title: "Show yourself",
+          artist: "Mastodon",
+          genre: "Metal",
+          rating: "4",
+          filteredGenre: true,
+          filteredRating: true,
         },
       ],
     };
     this.addSong = this.addSong.bind(this);
     this.deleteSong = this.deleteSong.bind(this);
-    // this.filterGenre = this.filterGenre.bind(this); 
-    // this.filterRating = this.filterRating.bind(this); 
-    this.handleFilter = this.handleFilter.bind(this)
+    // this.filterGenre = this.filterGenre.bind(this); // for separated handle event filterGenre
+    // this.filterRating = this.filterRating.bind(this); // for separated handle event filterRating
+    this.handleFilter = this.handleFilter.bind(this);
   }
 
   addSong = (song) => {
@@ -82,8 +82,8 @@ class SongOverview extends React.Component {
       artist: song.artist,
       genre: song.genre,
       rating: song.rating,
-      filteredGenre: "Yes",
-      filteredRating: "Yes"
+      filteredGenre: true,
+      filteredRating: true,
     };
     this.setState({ songs: this.state.songs.concat(newSong) });
   };
@@ -98,14 +98,10 @@ class SongOverview extends React.Component {
   };
 
   handleFilter = (event) => {
-    const selectedFilter = event.target.value 
-    const selectedFilterOptions = event.target.options.value
-    console.log("handleFilter was activated with", selectedFilter)
-    console.log("selectedFilterOptios", selectedFilterOptions)
-    const newSongList = this.state.songs.map(song => {
-      console.log("map in handelFilter was activated")
-      const filteredGenre = song.filteredGenre
-      const filteredRating = song.filteredRating
+    const selectedFilter = event.target.value;
+    const newSongList = this.state.songs.map((song) => {
+      const filteredGenre = song.filteredGenre;
+      const filteredRating = song.filteredRating;
       if (selectedFilter === "allGenres") {
         return {
           id: song.id,
@@ -113,85 +109,77 @@ class SongOverview extends React.Component {
           artist: song.artist,
           genre: song.genre,
           rating: song.rating,
-          filteredGenre: "Yes",
-          filteredRating: "Yes"
-        }
-      }
-      else if (selectedFilter === "allRating") {
+          filteredGenre: true,
+          filteredRating: true,
+        };
+      } else if (selectedFilter === "allRating") {
         return {
           id: song.id,
           title: song.title,
           artist: song.artist,
           genre: song.genre,
           rating: song.rating,
-          filteredGenre: "Yes",
-          filteredRating: "Yes"
-        }
-      }
-      else if (
-          // (selectedFilter === "allGenres" && filteredRating === "Yes") ||
-          // (selectedFilter === "allRating" && filteredGenre === "Yes") || 
-          (selectedFilter === song.genre && filteredRating === "Yes") ||
-          (selectedFilter === song.rating && filteredGenre === "Yes")) { 
-        console.log("Yes - Yes with", song)
+          filteredGenre: true,
+          filteredRating: true,
+        };
+      } else if (
+        (selectedFilter === song.genre && filteredRating === true) ||
+        (selectedFilter === song.rating && filteredGenre === true)
+      ) {
         return {
           id: song.id,
           title: song.title,
           artist: song.artist,
           genre: song.genre,
           rating: song.rating,
-          filteredGenre: "Yes",
-          filteredRating: "Yes"
-        }
-      }
-      else if ((selectedFilter === "allGenres" && filteredRating === "No") ||
-              (selectedFilter === song.genre && filteredRating === "No") || 
-              (selectedFilter !== song.genre && filteredRating === "No")
-              // (selectedFilter !== song.rating && filteredGenre === "Yes")
-              ) { 
-        console.log("Yes - No with", song)
+          filteredGenre: true,
+          filteredRating: true,
+        };
+      } else if (
+        (selectedFilter === "allGenres" && filteredRating === false) ||
+        (selectedFilter === song.genre && filteredRating === false) ||
+        (selectedFilter !== song.genre && filteredRating === false)
+      ) {
         return {
           id: song.id,
           title: song.title,
           artist: song.artist,
           genre: song.genre,
           rating: song.rating,
-          filteredGenre: "Yes",
-          filteredRating: "No"
-        }
-      }
-      else if ((selectedFilter === "allRating" && filteredGenre === "No") ||
-              (selectedFilter === song.rating && filteredGenre === "No") || 
-              (selectedFilter !== song.genre && filteredRating === "Yes")) {
-        console.log("No - Yes with", song)
+          filteredGenre: true,
+          filteredRating: false,
+        };
+      } else if (
+        (selectedFilter === "allRating" && filteredGenre === false) ||
+        (selectedFilter === song.rating && filteredGenre === false) ||
+        (selectedFilter !== song.genre && filteredRating === true)
+      ) {
         return {
           id: song.id,
           title: song.title,
           artist: song.artist,
           genre: song.genre,
           rating: song.rating,
-          filteredGenre: "No",
-          filteredRating: "Yes"
-        }
+          filteredGenre: false,
+          filteredRating: true,
+        };
       }
-      // else if ((selectedFilter !== song.genre && selectedFilter !== song.rating && filteredRating === "No") ||
-      //         (selectedFilter !== song.rating && selectedFilter !==song.genre && filteredGenre === "No")) { 
       else {
-        console.log("No - No with", song)
         return {
           id: song.id,
           title: song.title,
           artist: song.artist,
           genre: song.genre,
           rating: song.rating,
-          filteredGenre: "No",
-          filteredRating: "No"
-        }
+          filteredGenre: false,
+          filteredRating: false,
+        };
       }
-    })
-    this.setState({ songs: newSongList})
-  }
+    });
+    this.setState({ songs: newSongList });
+  };
 
+  // //////// SEPARATED HANDLE EVENT filterGenre ////////////////
   // filterGenre = (event) => {
   //   const selectedGenre = event.target.value;
   //   const newSongList = this.state.songs.map((song) => {
@@ -205,7 +193,7 @@ class SongOverview extends React.Component {
   //         filteredGenre: true,
   //         filteredRating: true
   //       };
-  //     } 
+  //     }
   //     else {
   //       return {
   //         id: song.id,
@@ -221,6 +209,7 @@ class SongOverview extends React.Component {
   //   this.setState({ songs: newSongList})
   // };
 
+  // //////// SEPARATED HANDLE EVENT filterRating /////////////////
   // filterRating = (event) => {
   //   const selectedRating = event.target.value
   //   const newSongList = this.state.songs.map((song) => {
@@ -234,7 +223,7 @@ class SongOverview extends React.Component {
   //         filteredGenre: true,
   //         filteredRating: true
   //       };
-  //     } 
+  //     }
   //     else {
   //       return {
   //         id: song.id,
