@@ -1,12 +1,16 @@
 import React from "react";
 import SongItem from "./SongItem"
 
-const SongList = ({songs, deleteSong, selectGenre, selectRating, }) => {
+const SongList = ({songs, deleteSong, handleFilter }) => {
 
     const songList = songs.map(song => {
-        if (song.filteredGenre === true && song.filteredRating === true) {
+        if (song.filteredGenre === "Yes" && song.filteredRating === "Yes") 
+            {
             return <SongItem key={song.id} song={song} deleteSong={deleteSong}/>
         }
+        // else {
+        //     console.log("false - false")
+        // }
     })
 
   return (
@@ -18,8 +22,8 @@ const SongList = ({songs, deleteSong, selectGenre, selectRating, }) => {
             <th>Song</th>
             <th>Artist</th>
             <th>
-                <select onChange={selectGenre}>
-                    <option value="All">--genre--</option>
+                <select onChange={handleFilter}>
+                    <option value="allGenres">--genre--</option>
                     <option value="Classic">Classic</option>
                     <option value="Pop">Pop</option>
                     <option value="Jazz">Jazz</option>
@@ -30,8 +34,8 @@ const SongList = ({songs, deleteSong, selectGenre, selectRating, }) => {
                 </select>
             </th>
             <th>
-                <select onChange={selectRating}>
-                    <option value="All">--rating--</option>
+                <select onChange={handleFilter}>
+                    <option value="allRating">--rating--</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
