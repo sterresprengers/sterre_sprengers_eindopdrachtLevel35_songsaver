@@ -4,8 +4,8 @@ class SongForm extends React.Component {
   state = {
     title: "",
     artist: "",
-    genre: ["classic", "pop", "jazz", "rock", "soul", "metal", "hiphop"],
-    rating: ["1", "2", "3", "4", "5"],
+    genre: "", 
+    rating: "",
   };
 
   render() {
