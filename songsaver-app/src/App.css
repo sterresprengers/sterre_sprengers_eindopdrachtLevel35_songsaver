@@ -1,38 +1,82 @@
-/* .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+body {
+  background-color: #d0efff;
+  font-family: "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  width: 100%;
+}
+
+.song-form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  column-gap: 15px;
+  margin: 100px 0px;
+}
+
+.add-button {
+  background-color: #187bcd;
+  color: #d0efff;
+  width: 150px;
+  height: 50px;
+  border-radius: 15px;
+}
+.add-button:hover {
+  background-color: #03254c;
+}
+h1 {
+  color: #03254c;
+}
+.song-list-table-header {
+  padding: 20px;
+  height: 50px;
+  text-align: left;
+}
+
+.song-list-table-title {
+  width: 350px;
+  color: #03254c;
+}
+
+.song-list-table-artist {
+  width: 200px;
+  color: #03254c;
+}
+.song-list-table-body {
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.item-title, .item-artist, .item-genre {
+  padding-left: 10px;
+  height: 40px;
+  font-size: 14px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
+.song-list-table-body-items:nth-child(even) {
+  background: #2a9df4;
+  padding-left: 10px;
+}
+
+.song-list-table-body-items:nth-child(odd) {
+  background: #1167b1;
+}
+
+.item-rating {
+  text-align: center;
+  font-size: 12px;
+}
+
+.item-delete-button {
+  background-color: #03254c;
+  color: #d0efff;
+  width: 70px;
+  height: 50px;
+}
+.item-delete-button:hover {
+  background-color: #187bcd;
+}
